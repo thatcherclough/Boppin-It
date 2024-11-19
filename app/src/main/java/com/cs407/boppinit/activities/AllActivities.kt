@@ -51,6 +51,13 @@ val EliminatedActivity: BopItActivity = BopItActivity(
     viewProvider = { done -> EliminatedActivityView(done) },
 )
 
+val GameOverActivity: BopItActivity = BopItActivity(
+    title = "Game Over!",
+    subtitle = "The game has ended. Better luck next time!",
+    timeLimits = null,
+    viewProvider = { done -> GameOverActivityView(done) },
+)
+
 object BopItActivityRepository {
     val activities = listOf(
         BopItActivity(

@@ -8,6 +8,7 @@ import com.cs407.boppinit.activities.BopItActivity
 import com.cs407.boppinit.activities.BopItActivityRepository
 import com.cs407.boppinit.activities.BopItActivityView
 import com.cs407.boppinit.activities.EliminatedActivity
+import com.cs407.boppinit.activities.GameOverActivity
 import com.cs407.boppinit.activities.PassItActivity
 import com.cs407.boppinit.databinding.ActivityGameplayBinding
 
@@ -30,7 +31,7 @@ class GameplayActivity : AppCompatActivity() {
         coop = intent.getStringExtra(GameProps.GAME_MODE.name) == GameMode.COOP.name
 
         updateActivity(BopItActivityRepository.getRandomActivity())
-        if (coop) { updatePlayersLeft(playersLeft) }
+        updatePlayersLeft(playersLeft)
     }
 
     private fun updateActivity(activity: BopItActivity) {
@@ -79,7 +80,12 @@ class GameplayActivity : AppCompatActivity() {
         if (currentActivity == PassItActivity) {
             updateActivity(BopItActivityRepository.getRandomActivity())
         } else {
-            updateActivity(EliminatedActivity)
+            if (playersLeft <= 1) {
+                playersLeft = 0
+                updateActivity(GameOverActivity)
+            } else {
+                updateActivity(EliminatedActivity)
+            }
         }
     }
 
