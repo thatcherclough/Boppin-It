@@ -12,7 +12,7 @@
         android:layout_height="48dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_star"
-        android:contentDescription="Start Menu"
+        android:contentDescription="@string/start_menu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,7 +22,7 @@
         android:layout_height="48dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_gear"
-        android:contentDescription="Settings"
+        android:contentDescription="@string/settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,7 +31,7 @@
         android:id="@+id/btnPlay"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="PLAY"
+        android:text="@string/play"
         android:textSize="24sp"
         android:layout_marginTop="48dp"
         app:layout_constraintTop_toBottomOf="@id/btnStar"
@@ -53,13 +53,13 @@
             android:id="@+id/btnSolo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Solo" />
+            android:text="@string/solo" />
 
         <Button
             android:id="@+id/btnCoop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Co-op" />
+            android:text="@string/coop" />
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
@@ -78,19 +78,19 @@
             android:id="@+id/btnEasy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Easy" />
+            android:text="@string/easy" />
 
         <Button
             android:id="@+id/btnMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Medium" />
+            android:text="@string/medium" />
 
         <Button
             android:id="@+id/btnHard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hard" />
+            android:text="@string/hard" />
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
 

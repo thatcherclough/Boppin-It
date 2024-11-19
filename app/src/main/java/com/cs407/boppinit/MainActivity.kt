@@ -107,9 +107,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startGame() {
-        val intent = Intent(this@MainActivity, PlayerSelectionActivity::class.java)
-        intent.putExtra(GameProps.GAME_MODE.name, selectedGameMode.name)
-        intent.putExtra(GameProps.DIFFICULTY.name, selectedDifficulty.name)
-        startActivity(intent)
+        if (selectedGameMode == GameMode.SOLO) {
+            val intent = Intent(this@MainActivity, GameplayActivity::class.java)
+            intent.putExtra(GameProps.GAME_MODE.name, selectedGameMode.name)
+            intent.putExtra(GameProps.DIFFICULTY.name, selectedDifficulty.name)
+            intent.putExtra(GameProps.NUM_PLAYERS.name, 1) // Assuming solo mode has 1 player
+            startActivity(intent)
+        } else {
+            val intent = Intent(this@MainActivity, PlayerSelectionActivity::class.java)
+            intent.putExtra(GameProps.GAME_MODE.name, selectedGameMode.name)
+            intent.putExtra(GameProps.DIFFICULTY.name, selectedDifficulty.name)
+            startActivity(intent)
+        }
     }
 }
