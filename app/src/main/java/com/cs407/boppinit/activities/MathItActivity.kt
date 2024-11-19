@@ -5,10 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.cs407.boppinit.databinding.FragmentEliminatedBinding
+import com.cs407.boppinit.Difficulty
+import com.cs407.boppinit.activities.standard.BopItActivityView
+import com.cs407.boppinit.databinding.FragmentMathItBinding
 
-class EliminatedActivityView(private val onComplete: () -> Unit) : Fragment(), BopItActivityView {
-    private var _binding: FragmentEliminatedBinding? = null
+class MathItActivityView(
+    private val onComplete: () -> Unit,
+    private val difficulty: Difficulty
+) : Fragment(), BopItActivityView {
+    private var _binding: FragmentMathItBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -16,7 +21,7 @@ class EliminatedActivityView(private val onComplete: () -> Unit) : Fragment(), B
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentEliminatedBinding.inflate(inflater, container, false)
+        _binding = FragmentMathItBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -32,7 +37,7 @@ class EliminatedActivityView(private val onComplete: () -> Unit) : Fragment(), B
     }
 
     override fun initializeView() {
-        binding.btnResume.setOnClickListener {
+        binding.btnComplete.setOnClickListener {
             onComplete()
         }
     }

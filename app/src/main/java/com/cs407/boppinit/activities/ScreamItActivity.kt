@@ -1,16 +1,19 @@
 package com.cs407.boppinit.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.cs407.boppinit.MainActivity
-import com.cs407.boppinit.databinding.FragmentGameOverBinding
+import com.cs407.boppinit.Difficulty
+import com.cs407.boppinit.activities.standard.BopItActivityView
+import com.cs407.boppinit.databinding.FragmentScreamItBinding
 
-class GameOverActivityView(private val onComplete: () -> Unit) : Fragment(), BopItActivityView {
-    private var _binding: FragmentGameOverBinding? = null
+class ScreamItActivityView(
+    private val onComplete: () -> Unit,
+    private val difficulty: Difficulty
+) : Fragment(), BopItActivityView {
+    private var _binding: FragmentScreamItBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -18,7 +21,7 @@ class GameOverActivityView(private val onComplete: () -> Unit) : Fragment(), Bop
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentGameOverBinding.inflate(inflater, container, false)
+        _binding = FragmentScreamItBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -34,10 +37,8 @@ class GameOverActivityView(private val onComplete: () -> Unit) : Fragment(), Bop
     }
 
     override fun initializeView() {
-        binding.btnMainMenu.setOnClickListener {
-            val intent = Intent(activity, MainActivity::class.java)
-            startActivity(intent)
-            activity?.finish()
+        binding.btnComplete.setOnClickListener {
+            onComplete()
         }
     }
 

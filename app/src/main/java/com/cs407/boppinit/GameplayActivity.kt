@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.cs407.boppinit.activities.BopItActivity
-import com.cs407.boppinit.activities.BopItActivityRepository
-import com.cs407.boppinit.activities.BopItActivityView
-import com.cs407.boppinit.activities.EliminatedActivity
-import com.cs407.boppinit.activities.GameOverActivity
-import com.cs407.boppinit.activities.PassItActivity
+import com.cs407.boppinit.activities.standard.BopItActivity
+import com.cs407.boppinit.activities.standard.BopItActivityRepository
+import com.cs407.boppinit.activities.standard.BopItActivityView
+import com.cs407.boppinit.activities.standard.EliminatedActivity
+import com.cs407.boppinit.activities.standard.GameOverActivity
+import com.cs407.boppinit.activities.standard.PassItActivity
 import com.cs407.boppinit.databinding.ActivityGameplayBinding
 
 class GameplayActivity : AppCompatActivity() {
@@ -34,14 +34,19 @@ class GameplayActivity : AppCompatActivity() {
         updatePlayersLeft(playersLeft)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        currentTimer?.cancel()
+    }
+
     private fun updateActivity(activity: BopItActivity) {
         // Cancel any existing timer
         currentTimer?.cancel()
 
         currentActivity = activity
-        currentView = activity.viewProvider {
+        currentView = activity.viewProvider({
             handleActivityComplete()
-        }
+        }, difficulty)
 
         // Update UI with activity details
         binding.titleText.text = activity.title
@@ -82,6 +87,7 @@ class GameplayActivity : AppCompatActivity() {
         } else {
             if (playersLeft <= 1) {
                 playersLeft = 0
+                updatePlayersLeft(playersLeft)
                 updateActivity(GameOverActivity)
             } else {
                 updateActivity(EliminatedActivity)
@@ -93,10 +99,12 @@ class GameplayActivity : AppCompatActivity() {
         currentTimer?.cancel()
         if (currentActivity == EliminatedActivity) {
             playersLeft--
-            if (coop) { updatePlayersLeft(playersLeft) }
+            updatePlayersLeft(playersLeft)
             updateActivity(BopItActivityRepository.getRandomActivity())
-        } else {
+        } else if (coop) {
             updateActivity(PassItActivity)
+        } else {
+            updateActivity(BopItActivityRepository.getRandomActivity())
         }
     }
 
@@ -105,7 +113,6 @@ class GameplayActivity : AppCompatActivity() {
     }
 
     private fun updatePlayersLeft(players: Int) {
-
         var playersString = "$playersLeft"
         if (players == 1) {
             playersString += " player left"
@@ -113,10 +120,5 @@ class GameplayActivity : AppCompatActivity() {
             playersString += " players left"
         }
         binding.playersRemainingText.text = playersString
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        currentTimer?.cancel()
     }
 }

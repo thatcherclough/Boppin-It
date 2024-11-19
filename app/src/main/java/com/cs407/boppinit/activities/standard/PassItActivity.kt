@@ -1,4 +1,4 @@
-package com.cs407.boppinit.activities
+package com.cs407.boppinit.activities.standard
 
 import androidx.fragment.app.Fragment
 
