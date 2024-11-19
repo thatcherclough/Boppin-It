@@ -7,7 +7,7 @@ import com.cs407.boppinit.databinding.ActivityPlayerSelectionBinding
 
 class PlayerSelectionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPlayerSelectionBinding
-    private var numPlayers = 1
+    private var numPlayers = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +24,7 @@ class PlayerSelectionActivity : AppCompatActivity() {
             }
 
             btnMinus.setOnClickListener {
-                if (numPlayers > 1) {
+                if (numPlayers > 2) {
                     numPlayers--
                     updatePlayerCount()
                 }
