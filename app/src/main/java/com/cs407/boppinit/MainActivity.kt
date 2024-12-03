@@ -41,7 +41,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             btnStar.setOnClickListener {
-                // STATS
+                val intent = Intent(this@MainActivity, StatsActivity::class.java)
+                startActivity(intent)
             }
 
             btnSettings.setOnClickListener {

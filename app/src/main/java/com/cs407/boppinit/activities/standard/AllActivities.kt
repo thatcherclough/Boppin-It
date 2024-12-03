@@ -1,6 +1,7 @@
 package com.cs407.boppinit.activities.standard
 
 import com.cs407.boppinit.Difficulty
+import com.cs407.boppinit.GameMode
 import com.cs407.boppinit.activities.FlipItActivityView
 import com.cs407.boppinit.activities.ListenToItActivityView
 import com.cs407.boppinit.activities.MashItActivityView
@@ -10,7 +11,6 @@ import com.cs407.boppinit.activities.PlayItActivityView
 import com.cs407.boppinit.activities.ScreamItActivityView
 import com.cs407.boppinit.activities.ShakeItActivityView
 import com.cs407.boppinit.activities.SpinItActivityView
-import com.cs407.boppinit.activities.TestItActivityView
 
 data class ActivityTimeLimits(
     val easy: Long,
@@ -60,12 +60,23 @@ val EliminatedActivity: BopItActivity = BopItActivity(
     viewProvider = { done, _ -> EliminatedActivityView(done) },
 )
 
-val GameOverActivity: BopItActivity = BopItActivity(
-    title = "Game Over!",
-    subtitle = "The game has ended.\nBetter luck next time!",
-    timeLimits = null,
-    viewProvider = { done, _ -> GameOverActivityView(done) },
-)
+val GameOverActivity: (score: Int, activitiesCompleted: Int, difficulty: Difficulty, gameMode: GameMode, newHighScore: Boolean) -> BopItActivity = { score, activitiesCompleted, difficulty, gameMode, newHighScore ->
+    BopItActivity(
+        title = "Game Over!",
+        subtitle = "The game has ended.\nGreat job!",
+        timeLimits = null,
+        viewProvider = { done, _ ->
+            GameOverActivityView(
+                onComplete = done,
+                score = score,
+                activitiesCompleted = activitiesCompleted,
+                difficulty = difficulty,
+                gameMode = gameMode,
+                isNewHighScore = newHighScore
+            )
+        }
+    )
+}
 
 object BopItActivityRepository {
     val activities = listOf(

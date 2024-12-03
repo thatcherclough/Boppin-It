@@ -15,6 +15,7 @@ class PlayerSelectionActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupClickListeners()
+        updatePlayerCount()
     }
 
     private fun setupClickListeners() {
