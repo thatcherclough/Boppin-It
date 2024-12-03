@@ -9,4 +9,5 @@
     <string name="easy">Easy</string>
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
+    <string name="default_web_client_id">793079572572-um9hha2j6skkolsgh9f0gl58nhbsa7fc.apps.googleusercontent.com</string>
 </resources>

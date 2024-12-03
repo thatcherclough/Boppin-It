@@ -165,8 +165,16 @@ class GameplayActivity : AppCompatActivity() {
             activitiesCompleted = activitiesCompleted
         )
 
+        // Save to local games
         lifecycleScope.launch(Dispatchers.IO) {
             gameHistoryDao.insert(gameHistory)
+        }
+
+        // Save to global leaderboard if it's a solo game
+        if (!coop && LeaderboardRepository().isLoggedIn()) {
+            lifecycleScope.launch(Dispatchers.IO) {
+                LeaderboardRepository().updateUserScore(gameHistoryDao.getSumOfScores())
+            }
         }
     }
 

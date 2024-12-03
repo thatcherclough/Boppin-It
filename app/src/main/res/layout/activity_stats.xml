@@ -13,12 +13,12 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Local" />
+            android:text="Stats" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Leaderboard" />
+            android:text="Worldwide" />
 
     </com.google.android.material.tabs.TabLayout>
 
@@ -118,12 +118,55 @@
         android:layout_height="match_parent"
         android:visibility="gone">
 
-        <TextView
+        <!-- Sign In Layout -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSignIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Leaderboard Coming Soon!"
-            android:textAppearance="?attr/textAppearanceHeadline6"/>
+            android:text="Sign in with Google"
+            android:drawableLeft="@drawable/ic_google"
+            android:padding="12dp"/>
+
+        <!-- Leaderboard Content (Visible after sign in) -->
+        <LinearLayout
+            android:id="@+id/leaderboardContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tvRankMessage"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAppearance="?attr/textAppearanceBody1"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnScrollToMe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Find Me"/>
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/leaderboardRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:padding="8dp"
+                android:clipToPadding="false"/>
+
+        </LinearLayout>
 
     </FrameLayout>
 

@@ -52,6 +52,11 @@ interface GameHistoryDao {
     // Get high score for specific game mode
     @Query("SELECT * FROM game_history WHERE gameMode = :mode ORDER BY finalScore DESC LIMIT 1")
     suspend fun getHighScore(mode: GameMode): GameHistory?
+
+    fun getSumOfScores(): Int {
+        val games = getAllGames()
+        return games.filter { it.gameMode == GameMode.SOLO }.sumOf { it.finalScore }
+    }
 }
 
 class Converters {

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "793079572572",
+    "project_id": "boppin-it",
+    "storage_bucket": "boppin-it.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:793079572572:android:cd4f8b6e1982b78c62de99",
+        "android_client_info": {
+          "package_name": "com.cs407.boppinit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "793079572572-um9hha2j6skkolsgh9f0gl58nhbsa7fc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cs407.boppinit",
+            "certificate_hash": "0a1becc56b3346780f0345f09ccaac4cc410d09f"
+          }
+        },
+        {
+          "client_id": "793079572572-o8lqrq5rtcf1bhhmgacma845oa4oo9kq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQWWX0XNitpcgzMMzsO5fJfBGlnivF4Uo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "793079572572-o8lqrq5rtcf1bhhmgacma845oa4oo9kq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
