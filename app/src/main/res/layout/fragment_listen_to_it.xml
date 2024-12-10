@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:layout_marginTop="-20dp">
 
     <Button
         android:id="@+id/playSoundButton"
@@ -12,22 +12,25 @@
         android:layout_height="wrap_content"
         android:text="Play Sound"
         android:layout_gravity="center"
-        android:textSize="18sp"
-        android:padding="16dp" />
+        android:textSize="20sp"
+        android:padding="16dp"
+        android:layout_marginBottom="16dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginBottom="8dp">
 
         <ImageView
             android:id="@+id/option1Image"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:src="@drawable/monkey_image"
             android:layout_gravity="center"
-            android:contentDescription="Monkey" />
+            android:contentDescription="Monkey"
+            android:layout_marginBottom="4dp" />
 
         <Button
             android:id="@+id/option1Button"
@@ -40,16 +43,18 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginBottom="8dp">
 
         <ImageView
             android:id="@+id/option2Image"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:src="@drawable/dog_image"
             android:layout_gravity="center"
-            android:contentDescription="Dog" />
+            android:contentDescription="Dog"
+            android:layout_marginBottom="4dp" />
 
         <Button
             android:id="@+id/option2Button"
@@ -62,16 +67,17 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:gravity="center">
 
         <ImageView
             android:id="@+id/option3Image"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/cow_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
-            android:contentDescription="Cow" />
+            android:layout_marginBottom="4dp"
+            android:contentDescription="Cow"
+            android:src="@drawable/cow_image" />
 
         <Button
             android:id="@+id/option3Button"

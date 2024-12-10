@@ -10,6 +10,7 @@ import com.cs407.boppinit.Difficulty
 import com.cs407.boppinit.R
 import com.cs407.boppinit.activities.standard.BopItActivityView
 import com.cs407.boppinit.databinding.FragmentListenToItBinding
+import android.widget.Toast
 
 class ListenToItActivityView(
     private val onComplete: () -> Unit,
@@ -74,13 +75,10 @@ class ListenToItActivityView(
         // Nothing needed to clean up
     }
 
-//    private fun startNewRound() {
-//        val sounds = listOf(R.raw.chimpanzee_sound_effect, R.raw.cow_sound_effect, R.raw.dog_sound_effect)
-//        selectedSound = sounds.random()
-//    }
     private fun startNewRound() {
         val sounds = soundToButtonMap.keys.toList()
         selectedSound = sounds.random()
+        playSound()
     }
 
     private fun playSound() {
@@ -96,7 +94,7 @@ class ListenToItActivityView(
     }
 
     private fun handleIncorrectAnswer() {
-        // Logic to handle incorrect answer, e.g., show a message or reduce score
+        Toast.makeText(requireContext(), "Incorrect! Try again.", Toast.LENGTH_SHORT).show()
         println("Incorrect answer!")
     }
 
@@ -105,7 +103,7 @@ class ListenToItActivityView(
             val correctButton = soundToButtonMap[sound]
             if (selectedAnimal == correctButton) {
                 onComplete()
-            } else if (selectedAnimal != correctButton) {
+            } else {
                 handleIncorrectAnswer()
             }
         }
