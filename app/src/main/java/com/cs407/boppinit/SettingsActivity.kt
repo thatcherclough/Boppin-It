@@ -30,12 +30,18 @@ class SettingsActivity : AppCompatActivity() {
         // Set a listener to save the sound setting
         binding.switchSound.setOnCheckedChangeListener { _, isChecked ->
             sharedPreferences.edit().putBoolean("sound_enabled", isChecked).apply()
+            if (isChecked) {
+                AudioManager.playMusic()
+            } else {
+                AudioManager.stopMusic()
+            }
         }
 
         // Set a listener to save the volume setting
         binding.seekBarVolume.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 sharedPreferences.edit().putInt("volume", progress).apply()
+                AudioManager.applyVolumeSettings()
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -46,5 +52,10 @@ class SettingsActivity : AppCompatActivity() {
                 // Do nothing
             }
         })
+
+        // Set a listener for the back button
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
     }
 }
