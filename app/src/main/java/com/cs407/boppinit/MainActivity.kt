@@ -32,6 +32,12 @@ class MainActivity : AppCompatActivity() {
 
         setupClickListeners()
         setupToggleGroups()
+
+        // Initialize audio manager
+        AudioManager.initialize(this)
+
+        // Play music
+        AudioManager.playMusic()
     }
 
     private fun setupClickListeners() {
@@ -121,5 +127,10 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra(GameProps.DIFFICULTY.name, selectedDifficulty.name)
             startActivity(intent)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        AudioManager.stopMusic()
     }
 }
