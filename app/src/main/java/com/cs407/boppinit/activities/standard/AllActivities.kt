@@ -104,7 +104,7 @@ object BopItActivityRepository {
         ),
         BopItActivity(
             title = "Listen to it!",
-            subtitle = "Listen to this track B***H!",
+            subtitle = "Select the button corresponding to the sound you hear.",
             timeLimits = ActivityTimeLimits(
                 easy = 10000L,    // 10 seconds
                 medium = 7000L,  // 7 seconds
