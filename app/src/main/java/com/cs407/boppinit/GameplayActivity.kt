@@ -45,7 +45,8 @@ class GameplayActivity : AppCompatActivity() {
         playersLeft = numPlayers
         coop = intent.getStringExtra(GameProps.GAME_MODE.name) == GameMode.COOP.name
 
-        updateActivity(BopItActivityRepository.getRandomActivity())
+        val gameMode = if (coop) GameMode.COOP else GameMode.SOLO
+        updateActivity(BopItActivityRepository.getRandomActivity(gameMode))
         updatePlayersLeft(playersLeft)
     }
 
@@ -100,7 +101,8 @@ class GameplayActivity : AppCompatActivity() {
 
     private fun handleTimeUp() {
         if (currentActivity == PassItActivity) {
-            updateActivity(BopItActivityRepository.getRandomActivity())
+            val gameMode = if (coop) GameMode.COOP else GameMode.SOLO
+            updateActivity(BopItActivityRepository.getRandomActivity(gameMode))
         } else {
             if (playersLeft <= 1) {
                 playersLeft = 0
@@ -121,8 +123,6 @@ class GameplayActivity : AppCompatActivity() {
 
                     updateActivity(gameOverActivityInstance)
                 }
-
-
             } else {
                 updateActivity(EliminatedActivity)
             }
@@ -136,16 +136,17 @@ class GameplayActivity : AppCompatActivity() {
 
     private fun handleActivityComplete() {
         currentTimer?.cancel()
+        val gameMode = if (coop) GameMode.COOP else GameMode.SOLO
         if (currentActivity == EliminatedActivity) {
             playersLeft--
             updatePlayersLeft(playersLeft)
-            updateActivity(BopItActivityRepository.getRandomActivity())
+            updateActivity(BopItActivityRepository.getRandomActivity(gameMode))
         } else if (coop) {
             updateScore()
             updateActivity(PassItActivity)
         } else {
             updateScore()
-            updateActivity(BopItActivityRepository.getRandomActivity())
+            updateActivity(BopItActivityRepository.getRandomActivity(gameMode))
         }
     }
 
