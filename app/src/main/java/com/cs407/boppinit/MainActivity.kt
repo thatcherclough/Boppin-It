@@ -46,7 +46,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             btnSettings.setOnClickListener {
-                // SETTINGS
+                val intent = Intent(this@MainActivity, SettingsActivity::class.java)
+                startActivity(intent)
             }
         }
     }
