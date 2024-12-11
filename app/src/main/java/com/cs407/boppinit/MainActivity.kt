@@ -1,9 +1,13 @@
 package com.cs407.boppinit
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.forEach
 import com.cs407.boppinit.databinding.ActivityMainBinding
 
@@ -25,10 +29,17 @@ class MainActivity : AppCompatActivity() {
     private var selectedGameMode: GameMode = GameMode.SOLO
     private var selectedDifficulty: Difficulty = Difficulty.EASY
 
+    companion object {
+        private const val MICROPHONE_PERMISSION_CODE = 200
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        requestMicrophonePermission()
 
         setupClickListeners()
         setupToggleGroups()
@@ -38,6 +49,31 @@ class MainActivity : AppCompatActivity() {
 
         // Play music
         AudioManager.playMusic()
+    }
+
+    private fun requestMicrophonePermission() {
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO)
+            != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(android.Manifest.permission.RECORD_AUDIO),
+                MICROPHONE_PERMISSION_CODE
+            )
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == MICROPHONE_PERMISSION_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                // Show toast
+                Toast.makeText(this, "Microphone permission is required to play the game", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun setupClickListeners() {

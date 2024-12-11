@@ -191,7 +191,7 @@ object BopItActivityRepository {
 
 
     // Hardcode to scream it or whatever other activity you want to test
-//    fun getRandomActivity(): BopItActivity {
+//    fun getRandomActivity(gameMode: GameMode): BopItActivity {
 //        // Hardcode to return the "Scream It!" activity
 //        val screamItActivity = activities.find { it.title == "Scream It!" }
 //        if (screamItActivity != null) {

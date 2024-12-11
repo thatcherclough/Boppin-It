@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.cs407.boppinit.Difficulty
 import com.cs407.boppinit.activities.standard.BopItActivityView
 import com.cs407.boppinit.databinding.FragmentScreamItBinding
+import java.io.File
 
 class ScreamItActivityView(
     private val onComplete: () -> Unit,
@@ -21,8 +22,8 @@ class ScreamItActivityView(
     private val binding get() = _binding!!
     private var mediaRecorder: MediaRecorder? = null
     private val handler = Handler(Looper.getMainLooper())
-    private val threshold = 5000 // Adjust this based on testing
-    private var calibrationPeriod = 2000L // 2 seconds
+    private var threshold = 1000
+    private var calibrationPeriod = 1000L // 2 seconds
     private var startTime = 0L
 
     override fun onCreateView(
@@ -30,6 +31,12 @@ class ScreamItActivityView(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        threshold = when (difficulty) {
+            Difficulty.EASY -> 1000
+            Difficulty.MEDIUM -> 5000
+            Difficulty.HARD -> 10000
+        }
+
         _binding = FragmentScreamItBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -47,12 +54,14 @@ class ScreamItActivityView(
     }
 
     override fun initializeView() {
+        binding.thresholdText.text = "Threshold: $threshold"
         binding.btnComplete.setOnClickListener {
             onComplete()
         }
     }
 
     override fun startActivity() {
+        binding.volumeProgressBar.max = threshold
         startMicrophone()
         handler.postDelayed(checkVolumeRunnable, 100)
     }
@@ -64,17 +73,32 @@ class ScreamItActivityView(
 
     private fun startMicrophone() {
         try {
-            mediaRecorder = MediaRecorder().apply {
+            val outputFile = File(requireContext().cacheDir, "audio_test.mp3")
+
+            mediaRecorder = MediaRecorder(requireContext()).apply {
                 setAudioSource(MediaRecorder.AudioSource.MIC)
-                setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-                setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-                setOutputFile("/dev/null")
-                prepare()
-                start()
+                setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
+                setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
+                setAudioChannels(1) // Mono recording
+                setAudioSamplingRate(44100) // Standard sampling rate
+                setAudioEncodingBitRate(128000) // 128kbps
+                setOutputFile(outputFile.absolutePath)
+
+                try {
+                    prepare()
+                    start()
+                    Log.d("ScreamItActivityView", "Microphone started successfully")
+                } catch (e: Exception) {
+                    Log.e("ScreamItActivityView", "Error in prepare/start", e)
+                    release()
+                    mediaRecorder = null
+                }
             }
             startTime = System.currentTimeMillis()
         } catch (e: Exception) {
-            Log.e("ScreamItActivityView", "Error starting MediaRecorder", e)
+            Log.e("ScreamItActivityView", "Error configuring MediaRecorder", e)
+            mediaRecorder?.release()
+            mediaRecorder = null
         }
     }
 
@@ -95,10 +119,10 @@ class ScreamItActivityView(
         override fun run() {
             mediaRecorder?.let {
                 val elapsedTime = System.currentTimeMillis() - startTime
+                val maxAmplitude = it.maxAmplitude
+                binding.volumeProgressBar.progress = maxAmplitude
+                binding.thresholdText.text = "Current Amplitude: $maxAmplitude"
                 if (elapsedTime > calibrationPeriod) {
-                    val maxAmplitude = it.maxAmplitude
-                    binding.volumeProgressBar.progress = maxAmplitude
-                    binding.thresholdText.text = "Current Amplitude: $maxAmplitude"
                     if (maxAmplitude > threshold) {
                         onComplete()
                         return
