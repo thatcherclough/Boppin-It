@@ -32,9 +32,9 @@ class ScreamItActivityView(
         savedInstanceState: Bundle?
     ): View {
         threshold = when (difficulty) {
-            Difficulty.EASY -> 1000
-            Difficulty.MEDIUM -> 5000
-            Difficulty.HARD -> 10000
+            Difficulty.EASY -> 10000
+            Difficulty.MEDIUM -> 20000
+            Difficulty.HARD -> 30000
         }
 
         _binding = FragmentScreamItBinding.inflate(inflater, container, false)

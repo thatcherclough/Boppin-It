@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.cs407.boppinit.AudioManager
 import com.cs407.boppinit.Difficulty
 import com.cs407.boppinit.activities.standard.BopItActivityView
 import com.cs407.boppinit.databinding.FragmentMashItBinding
@@ -64,6 +65,7 @@ class MashItActivityView(
 
     private fun onMashButtonClick() {
         remainingMashes--
+        AudioManager.playPunch()
         updateMashesDisplay()
 
         if (remainingMashes <= 0) {

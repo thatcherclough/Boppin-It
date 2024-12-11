@@ -19,6 +19,7 @@ object AudioManager {
     private var vocalEliminatedSoundId: Int = 0
     private var vocalPassItSoundId: Int = 0
     private var vocalGoodJobSoundId: Int = 0
+    private var punchSFXId: Int = 0
 
     private var isInitialized = false
 
@@ -45,6 +46,7 @@ object AudioManager {
         vocalEliminatedSoundId = soundPool.load(context, R.raw.eliminated_vocal, 1)
         vocalPassItSoundId = soundPool.load(context, R.raw.pass_vocal, 1)
         vocalGoodJobSoundId = soundPool.load(context, R.raw.good_job_vocal, 1)
+        punchSFXId = soundPool.load(context, R.raw.punch, 1)
 
 
         // Load music
@@ -87,6 +89,10 @@ object AudioManager {
 
     fun playVocalGoodJobSound() {
         playSoundEffect(vocalGoodJobSoundId)
+    }
+
+    fun playPunch() {
+        playSoundEffect(punchSFXId)
     }
 
     private fun playSoundEffect(soundId: Int) {

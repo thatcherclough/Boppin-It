@@ -1,6 +1,7 @@
 package com.cs407.boppinit
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Button
@@ -46,6 +47,8 @@ class MainActivity : AppCompatActivity() {
 
         // Start audio manager
         AudioManager.startAudioManager(this)
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
     }
 
     private fun requestMicrophonePermission() {
