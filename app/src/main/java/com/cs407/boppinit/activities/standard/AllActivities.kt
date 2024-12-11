@@ -7,7 +7,6 @@ import com.cs407.boppinit.activities.ListenToItActivityView
 import com.cs407.boppinit.activities.MashItActivityView
 import com.cs407.boppinit.activities.MathItActivityView
 import com.cs407.boppinit.activities.PickItActivityView
-import com.cs407.boppinit.activities.PlayItActivityView
 import com.cs407.boppinit.activities.ScreamItActivityView
 import com.cs407.boppinit.activities.ShakeItActivityView
 import com.cs407.boppinit.activities.SpinItActivityView
@@ -131,16 +130,6 @@ object BopItActivityRepository {
                 hard = 5000L     // 5 second
             ),
             viewProvider = { onComplete, difficulty -> PickItActivityView(onComplete, difficulty) }
-        ),
-        BopItActivity(
-            title = "Play It!",
-            subtitle = "We should put some game like 2048 here.",
-            timeLimits = ActivityTimeLimits(
-                easy = 10000L,    // 10 seconds
-                medium = 7000L,  // 7 seconds
-                hard = 5000L     // 5 second
-            ),
-            viewProvider = { onComplete, difficulty -> PlayItActivityView(onComplete, difficulty) }
         ),
         BopItActivity(
             title = "Scream It!",
