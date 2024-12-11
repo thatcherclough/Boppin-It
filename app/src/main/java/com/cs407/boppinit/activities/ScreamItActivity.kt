@@ -55,9 +55,6 @@ class ScreamItActivityView(
 
     override fun initializeView() {
         binding.thresholdText.text = "Threshold: $threshold"
-        binding.btnComplete.setOnClickListener {
-            onComplete()
-        }
     }
 
     override fun startActivity() {
