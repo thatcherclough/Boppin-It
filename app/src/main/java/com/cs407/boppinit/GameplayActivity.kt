@@ -105,11 +105,17 @@ class GameplayActivity : AppCompatActivity() {
             updateActivity(BopItActivityRepository.getRandomActivity(gameMode))
         } else {
             if (playersLeft <= 1) {
+
                 playersLeft = 0
                 updatePlayersLeft(playersLeft)
 
                 lifecycleScope.launch {
                     val isNewHighScore = isNewHighScore(currentScore, if (coop) GameMode.COOP else GameMode.SOLO)
+                    if (isNewHighScore) {
+                        AudioManager.playVocalGoodJobSound()
+                    } else {
+                        AudioManager.playVocalGameOverSound()
+                    }
                     saveGame()
 
                     // Create the game over activity with current game stats
@@ -124,6 +130,7 @@ class GameplayActivity : AppCompatActivity() {
                     updateActivity(gameOverActivityInstance)
                 }
             } else {
+                AudioManager.playVocalEliminatedSound()
                 updateActivity(EliminatedActivity)
             }
         }
@@ -142,9 +149,12 @@ class GameplayActivity : AppCompatActivity() {
             updatePlayersLeft(playersLeft)
             updateActivity(BopItActivityRepository.getRandomActivity(gameMode))
         } else if (coop) {
+            AudioManager.playSuccessSound()
+            AudioManager.playVocalPassItSound()
             updateScore()
             updateActivity(PassItActivity)
         } else {
+            AudioManager.playSuccessSound()
             updateScore()
             updateActivity(BopItActivityRepository.getRandomActivity(gameMode))
         }
