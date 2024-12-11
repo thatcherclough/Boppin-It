@@ -26,7 +26,7 @@ object AudioManager {
         successSoundId = soundPool.load(context, R.raw.success, 1)
 
         // Load music
-        val musicUri = Uri.parse("android.resource://${context.packageName}/${R.raw.gamemusic}")
+        val musicUri = Uri.parse("android.resource://${context.packageName}/${R.raw.gamemusic2}")
         mediaPlayer.setDataSource(context, musicUri)
         mediaPlayer.prepare()
         mediaPlayer.isLooping = true
