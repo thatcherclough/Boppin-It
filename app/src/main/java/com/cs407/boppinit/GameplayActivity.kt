@@ -116,7 +116,10 @@ class GameplayActivity : AppCompatActivity() {
                     } else {
                         AudioManager.playVocalGameOverSound()
                     }
-                    saveGame()
+
+                    if (currentScore > 0) {
+                        saveGame()
+                    }
 
                     // Create the game over activity with current game stats
                     val gameOverActivityInstance = GameOverActivity(

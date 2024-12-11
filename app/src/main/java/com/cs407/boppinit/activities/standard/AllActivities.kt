@@ -152,7 +152,7 @@ object BopItActivityRepository {
             viewProvider = { onComplete, difficulty -> ShakeItActivityView(onComplete, difficulty) }
         ),
         BopItActivity(
-            title = "Spin It Activity!",
+            title = "Spin It!",
             subtitle = "Spin this S**T!",
             timeLimits = ActivityTimeLimits(
                 easy = 10000L,    // 10 seconds

@@ -54,7 +54,7 @@ class SpinItActivityView(
 
         // Register the gyroscope listener
         gyroscope?.let {
-            sensorManager?.registerListener(this, it, SensorManager.SENSOR_DELAY_UI)
+            sensorManager?.registerListener(this, it, SensorManager.SENSOR_DELAY_GAME)
         }
 
         // Set the required rotation based on difficulty
@@ -69,12 +69,14 @@ class SpinItActivityView(
             Difficulty.HARD -> 1080f // Three full spins
         }
     }
+
     private fun updateRotationDisplay() {
         binding.spinItText.text = "Spin progress: ${rotationSum.toInt()} / ${requiredRotation.toInt()} degrees"
     }
 
     override fun startActivity() {
         // Make views visible if needed
+        rotationSum = 0f
         binding.spinItText.visibility = View.VISIBLE
         // Initial timestamp in nanoseconds
         lastTimestamp = System.nanoTime()
@@ -84,7 +86,6 @@ class SpinItActivityView(
         // Hide views if needed
         binding.spinItText.visibility = View.GONE
         sensorManager?.unregisterListener(this)
-
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
