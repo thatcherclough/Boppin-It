@@ -95,13 +95,18 @@ class ListenToItActivityView(
 
     private fun handleIncorrectAnswer() {
         Toast.makeText(requireContext(), "Incorrect! Try again.", Toast.LENGTH_SHORT).show()
-        println("Incorrect answer!")
+        mediaPlayer?.release()
+        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.incorrect)
+        mediaPlayer?.start()
     }
 
     private fun checkAnswer(selectedAnimal: String) {
         selectedSound?.let { sound ->
             val correctButton = soundToButtonMap[sound]
             if (selectedAnimal == correctButton) {
+                mediaPlayer?.release()
+                mediaPlayer = MediaPlayer.create(requireContext(), R.raw.success_listen_to_it)
+                mediaPlayer?.start()
                 onComplete()
             } else {
                 handleIncorrectAnswer()

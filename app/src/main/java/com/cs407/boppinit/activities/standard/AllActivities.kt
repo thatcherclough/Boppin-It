@@ -165,35 +165,40 @@ object BopItActivityRepository {
 
     private var lastActivity: BopItActivity? = null
 
-    fun getRandomActivity(gameMode: GameMode): BopItActivity {
-        var newActivity: BopItActivity
-        if (gameMode == GameMode.SOLO) {
-            do {
-                newActivity = activities.random()
-            } while (newActivity == lastActivity)
-        } else {
-            newActivity = activities.random()
-        }
-        lastActivity = newActivity
-        return newActivity
-    }
+//    fun getRandomActivity(gameMode: GameMode): BopItActivity {
+//        var newActivity: BopItActivity
+//        if (gameMode == GameMode.SOLO) {
+//            do {
+//                newActivity = activities.random()
+//            } while (newActivity == lastActivity)
+//        } else {
+//            newActivity = activities.random()
+//        }
+//        lastActivity = newActivity
+//        return newActivity
+//    }
 
 
     // Hardcode to scream it or whatever other activity you want to test
-//    fun getRandomActivity(gameMode: GameMode): BopItActivity {
-//        // Hardcode to return the "Scream It!" activity
+    fun getRandomActivity(gameMode: GameMode): BopItActivity {
+        // Hardcode to return the "Scream It!" activity
 //        val screamItActivity = activities.find { it.title == "Scream It!" }
 //        if (screamItActivity != null) {
 //            return screamItActivity
 //        }
-//
-//        var newActivity: BopItActivity
-//        do {
-//            newActivity = activities.random()
-//        } while (newActivity == lastActivity)
-//        lastActivity = newActivity
-//        return newActivity
-//    }
+
+        val listenToItActivity = activities.find { it.title == "Listen to it!" }
+        if (listenToItActivity != null) {
+            return listenToItActivity
+        }
+
+        var newActivity: BopItActivity
+        do {
+            newActivity = activities.random()
+        } while (newActivity == lastActivity)
+        lastActivity = newActivity
+        return newActivity
+    }
 
 
 }
