@@ -14,6 +14,22 @@ object AudioManager {
     private var alarmClockSoundId: Int = 0
     private var incorrectSoundId: Int = 0
     private var successSoundId: Int = 0
+    private var vocalSuccessSoundId: Int = 0
+    private var vocalGameOverSoundId: Int = 0
+    private var vocalEliminatedSoundId: Int = 0
+    private var vocalPassItSoundId: Int = 0
+    private var vocalGoodJobSoundId: Int = 0
+
+    private var isInitialized = false
+
+    fun startAudioManager(context: Context) {
+        if (isInitialized) {
+            return
+        }
+        initialize(context)
+        isInitialized = true
+        playMusic()
+    }
 
     fun initialize(context: Context) {
         soundPool = SoundPool.Builder().setMaxStreams(10).build()
@@ -24,6 +40,12 @@ object AudioManager {
         alarmClockSoundId = soundPool.load(context, R.raw.alarmclock_fiveseconds, 1)
         incorrectSoundId = soundPool.load(context, R.raw.incorrect, 1)
         successSoundId = soundPool.load(context, R.raw.success, 1)
+        vocalSuccessSoundId = soundPool.load(context, R.raw.correct_vocal, 1)
+        vocalGameOverSoundId = soundPool.load(context, R.raw.game_over_vocal, 1)
+        vocalEliminatedSoundId = soundPool.load(context, R.raw.eliminated_vocal, 1)
+        vocalPassItSoundId = soundPool.load(context, R.raw.pass_vocal, 1)
+        vocalGoodJobSoundId = soundPool.load(context, R.raw.good_job_vocal, 1)
+
 
         // Load music
         val musicUri = Uri.parse("android.resource://${context.packageName}/${R.raw.gamemusic2}")
@@ -47,6 +69,26 @@ object AudioManager {
         playSoundEffect(successSoundId)
     }
 
+    fun playVocalSuccessSound() {
+        playSoundEffect(vocalSuccessSoundId)
+    }
+
+    fun playVocalGameOverSound() {
+        playSoundEffect(vocalGameOverSoundId)
+    }
+
+    fun playVocalEliminatedSound() {
+        playSoundEffect(vocalEliminatedSoundId)
+    }
+
+    fun playVocalPassItSound() {
+        playSoundEffect(vocalPassItSoundId)
+    }
+
+    fun playVocalGoodJobSound() {
+        playSoundEffect(vocalGoodJobSoundId)
+    }
+
     private fun playSoundEffect(soundId: Int) {
         if (sharedPreferences.getBoolean("sound_enabled", true)) {
             val volume = sharedPreferences.getInt("volume", 50) / 100f
@@ -55,6 +97,9 @@ object AudioManager {
     }
 
     fun playMusic() {
+        if (mediaPlayer.isPlaying) {
+            return
+        }
         if (sharedPreferences.getBoolean("sound_enabled", true)) {
             mediaPlayer.start()
         }

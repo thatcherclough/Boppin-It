@@ -44,11 +44,8 @@ class MainActivity : AppCompatActivity() {
         setupClickListeners()
         setupToggleGroups()
 
-        // Initialize audio manager
-        AudioManager.initialize(this)
-
-        // Play music
-        AudioManager.playMusic()
+        // Start audio manager
+        AudioManager.startAudioManager(this)
     }
 
     private fun requestMicrophonePermission() {
