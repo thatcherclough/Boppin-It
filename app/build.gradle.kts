@@ -51,6 +51,7 @@ dependencies {
     implementation(libs.google.material)
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.common)
+    implementation(libs.androidx.preference.ktx)
     kapt(libs.androidx.room.compiler)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)

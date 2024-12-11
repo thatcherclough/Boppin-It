@@ -104,7 +104,7 @@ object BopItActivityRepository {
         ),
         BopItActivity(
             title = "Listen to it!",
-            subtitle = "Listen to this track B***H!",
+            subtitle = "Select the button corresponding to the sound you hear.",
             timeLimits = ActivityTimeLimits(
                 easy = 10000L,    // 10 seconds
                 medium = 7000L,  // 7 seconds
@@ -174,5 +174,37 @@ object BopItActivityRepository {
         )
     )
 
-    fun getRandomActivity(): BopItActivity = activities.random()
+    private var lastActivity: BopItActivity? = null
+
+    fun getRandomActivity(gameMode: GameMode): BopItActivity {
+        var newActivity: BopItActivity
+        if (gameMode == GameMode.SOLO) {
+            do {
+                newActivity = activities.random()
+            } while (newActivity == lastActivity)
+        } else {
+            newActivity = activities.random()
+        }
+        lastActivity = newActivity
+        return newActivity
+    }
+
+
+    // Hardcode to scream it or whatever other activity you want to test
+//    fun getRandomActivity(): BopItActivity {
+//        // Hardcode to return the "Scream It!" activity
+//        val screamItActivity = activities.find { it.title == "Scream It!" }
+//        if (screamItActivity != null) {
+//            return screamItActivity
+//        }
+//
+//        var newActivity: BopItActivity
+//        do {
+//            newActivity = activities.random()
+//        } while (newActivity == lastActivity)
+//        lastActivity = newActivity
+//        return newActivity
+//    }
+
+
 }
