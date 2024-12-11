@@ -38,5 +38,6 @@ Generally, the main module of our app is the mobile device itself, as many of th
 What makes our app truly mobile is that it will heavily use the gyroscope in order to confirm the player is carrying out the assigned tasks. It must do so for tasks such as ‘Flip It’, where the player must flip the phone over, or ‘Rotate It’, which has the player try to rotate the phone into a predetermined XYZ position in the world. This would be incredibly difficult with a desktop device because of the weight and general unwieldiness of it. We will additionally use features shared by both mobile and desktop devices such as the microphone, touchscreen capabilities, and potentially even the camera in order to keep the challenges from becoming too repetitive. The presence of a mobile device is essential in order to make our app function well and provide the user with a good experience that stays true to the original game.
 
 
+![ColeKalaus-bopit](https://github.com/user-attachments/assets/28f95302-f5fe-40aa-94e8-c5ba56002381)
 
 
